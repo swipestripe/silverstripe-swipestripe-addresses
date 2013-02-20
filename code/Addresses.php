@@ -145,9 +145,13 @@ class Addresses_Customer extends DataExtension {
 	 */
 	public function BillingAddress() {
 
-	  return $this->owner->BillingAddresses()
-	  	->where("\"Default\" = 1")
-	  	->first();
+		$addrs = $this->owner->BillingAddresses();
+		if ($addrs && $addrs->exists()) {
+			return $addrs
+				->where("\"Default\" = 1")
+		  	->first();
+		}
+	  return null;
 	}
 	
 	/**
@@ -158,9 +162,13 @@ class Addresses_Customer extends DataExtension {
 	 */
 	public function ShippingAddress() {
 
-	  return $this->owner->ShippingAddresses()
-	  	->where("\"Default\" = 1")
-	  	->first();
+		$addrs = $this->owner->ShippingAddresses();
+		if ($addrs && $addrs->exists()) {
+			return $addrs
+				->where("\"Default\" = 1")
+		  	->first();
+		}
+	  return null;
 	}
 }
 
@@ -186,8 +194,8 @@ class Addresses_OrderForm extends Extension {
 			TextField::create('ShippingAddressLine2', '&nbsp;'),
 			TextField::create('ShippingCity', _t('CheckoutPage.CITY',"City"))
 				->setCustomValidationMessage(_t('CheckoutPage.PLEASE_ENTER_CITY',"Please enter a city.")),
-			TextField::create('ShippingPostalCode', _t('CheckoutPage.POSTAL_CODE',"Postal Code")),
-			TextField::create('ShippingState', _t('CheckoutPage.STATE',"State"))
+			TextField::create('ShippingPostalCode', _t('CheckoutPage.POSTAL_CODE',"Zip / Postal Code")),
+			TextField::create('ShippingState', _t('CheckoutPage.STATE',"State / Province"))
 				->addExtraClass('address-break'),
 			DropdownField::create('ShippingCountryCode', 
 					_t('CheckoutPage.COUNTRY',"Country"), 
@@ -213,8 +221,8 @@ class Addresses_OrderForm extends Extension {
 			TextField::create('BillingAddressLine2', '&nbsp;'),
 			TextField::create('BillingCity', _t('CheckoutPage.CITY',"City"))
 				->setCustomValidationMessage(_t('CheckoutPage.PLEASEENTERYOURCITY',"Please enter your city")),
-			TextField::create('BillingPostalCode', _t('CheckoutPage.POSTALCODE',"Postal Code")),
-			TextField::create('BillingState', _t('CheckoutPage.STATE',"State"))
+			TextField::create('BillingPostalCode', _t('CheckoutPage.POSTALCODE',"Zip / Postal Code")),
+			TextField::create('BillingState', _t('CheckoutPage.STATE',"State / Province"))
 				->addExtraClass('address-break'),
 			DropdownField::create('BillingCountryCode', 
 					_t('CheckoutPage.COUNTRY',"Country"), 
@@ -275,6 +283,16 @@ class Addresses_OrderForm extends Extension {
   public function getBillingAddressFields() {
   	return $this->owner->Fields()->fieldByName('BillingAddress');
   }
+}
+
+class Addresses_Extension extends DataExtension {
+
+  public static $has_many = array(
+    'ShippingCountries' => 'Country_Shipping',
+    'BillingCountries' => 'Country_Billing',
+    'ShippingRegions' => 'Region_Shipping',
+    'BillingRegions' => 'Region_Billing'
+  );
 }
 
 class Addresses_CountriesAdmin extends ShopAdmin {
