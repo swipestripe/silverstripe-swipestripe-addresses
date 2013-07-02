@@ -67,6 +67,17 @@ class Addresses_Customer extends DataExtension {
 		//Default is not used when comparing
 
 		$data = $order->toMap();
+		
+		// Set Firstname/Surname Fields on Member table
+		if(!$this->owner->FirstName) {
+			$this->owner->FirstName = $data['ShippingFirstName'];
+			$this->owner->write();
+		}
+		if(!$this->owner->Surname) {
+			$this->owner->Surname = $data['ShippingSurname'];
+			$this->owner->write();
+		}
+		
 		$shippingAddress = Address_Shipping::create(array(
 			'MemberID' => $this->owner->ID,
 			'FirstName' => $data['ShippingFirstName'],
