@@ -1,0 +1,16 @@
+---
+name: SwipeStripe Addresses
+---
+
+Order:
+  extensions: 
+    - 'Addresses_Order'
+Customer:
+  extensions: 
+    - 'Addresses_Customer'
+OrderForm:
+  extensions: 
+    - 'Addresses_OrderForm'
+ShopConfig:
+  extensions: 
+    - 'Addresses_Extension'
