@@ -28,20 +28,20 @@
 				var form = this.closest('form');
 
 				if (this.is(':checked')) {
-	        $('#address-shipping input[type=text], #address-shipping select', form).each(function(){
-            $('#' + $(this).attr('id').replace(/Shipping/i, 'Billing'))
-	            .val($('#' + $(this).attr('id')).val())
-	            .parent().parent().hide();
-	        });
-    		}
-    		//Only clear fields if specifically unticking checkbox
-        else if ($(e.currentTarget).attr('id') == this.attr('id')) {
-          $('#address-shipping input[type=text], #address-shipping select', form).each(function(){
-            $('#' + $(this).attr('id').replace(/Shipping/i, 'Billing'))
-              .val('')
-              .parent().parent().show();
-          });
-        }
+					$('#address-shipping input[type=text], #address-shipping select', form).each(function(){
+						$('#' + $(this).attr('id').replace(/Shipping/i, 'Billing'))
+							.val($('#' + $(this).attr('id')).val())
+							.parent().parent().hide();
+					});
+				}
+				//Only clear fields if specifically unticking checkbox
+				else if ($(e.currentTarget).attr('id') == this.attr('id')) {
+					$('#address-shipping input[type=text], #address-shipping select', form).each(function(){
+						$('#' + $(this).attr('id').replace(/Shipping/i, 'Billing'))
+							.val('')
+							.parent().parent().show();
+					});
+				}
 			}
 		});
 

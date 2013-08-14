@@ -21,24 +21,24 @@
 		<% end_if %>
 
 		<section class="address">
-    	<div id="address-shipping">
-	      <% loop ShippingAddressFields %>
-	        $FieldHolder
-	      <% end_loop %>
-	    </div>
-    </section>
+			<div id="address-shipping">
+				<% loop ShippingAddressFields %>
+					$FieldHolder
+				<% end_loop %>
+			</div>
+		</section>
 
-    <hr />
-  
-    <section class="address">
-	    <div id="address-billing">
-		    <% loop BillingAddressFields %>
-		      $FieldHolder
-		    <% end_loop %>
-	    </div>
-    </section>
-    
-    <hr />
+		<hr />
+	
+		<section class="address">
+			<div id="address-billing">
+				<% loop BillingAddressFields %>
+					$FieldHolder
+				<% end_loop %>
+			</div>
+		</section>
+		
+		<hr />
 		
 		<section class="order-details">
 			<h3><% _t('CheckoutForm.YOUR_ORDER', 'Your Order') %></h3>

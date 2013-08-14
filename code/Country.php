@@ -8,22 +8,22 @@
  * @subpackage order
  */
 class Country extends DataObject {
-  
-  /**
-   * Singular name
-   * 
-   * @var String
-   */
-  public static $singular_name = 'Country';
-  
-  /**
-   * Plural name
-   * 
-   * @var String
-   */
-  public static $plural_name = 'Countries';
-  
-  /** 
+	
+	/**
+	 * Singular name
+	 * 
+	 * @var String
+	 */
+	public static $singular_name = 'Country';
+	
+	/**
+	 * Plural name
+	 * 
+	 * @var String
+	 */
+	public static $plural_name = 'Countries';
+	
+	/** 
 	 * ISO 3166 Country Codes, used to generate inital billing countries
 	 * 
 	 * @see Country_Billing::requireDefaultRecords()
@@ -279,9 +279,9 @@ class Country extends DataObject {
 	 * 
 	 * @var Array
 	 */
-  public static $db = array(
+	public static $db = array(
 		'Code' => 'Varchar(2)', //ISO 3166 
-	  'Title' => 'Varchar'
+		'Title' => 'Varchar'
 	);
 	
 	/**
@@ -290,29 +290,29 @@ class Country extends DataObject {
 	 * @var Array
 	 */
 	public static $has_one = array (
-    'ShopConfig' => 'ShopConfig'
-  );
-  
-  /**
-   * Countries can have many regions
-   * 
-   * @var Array
-   */
-  public static $has_many = array (
-    'Regions' => 'Region'
-  );
-  
-  /**
-   * Summary fields
-   * 
-   * @var Array
-   */
-  public static $summary_fields = array(
-    'Title' => 'Title',
-    'Code' => 'Code'
-  );
+		'ShopConfig' => 'ShopConfig'
+	);
+	
+	/**
+	 * Countries can have many regions
+	 * 
+	 * @var Array
+	 */
+	public static $has_many = array (
+		'Regions' => 'Region'
+	);
+	
+	/**
+	 * Summary fields
+	 * 
+	 * @var Array
+	 */
+	public static $summary_fields = array(
+		'Title' => 'Title',
+		'Code' => 'Code'
+	);
 
-  public static $default_sort = 'Title ASC';
+	public static $default_sort = 'Title ASC';
 
 	public static function get_codes() {
 		return self::$iso_3166_countryCodes;
@@ -334,13 +334,13 @@ class Country_Shipping extends Country {
 	public function getCMSFields() {
 
 		$fields = new FieldList(
-      $rootTab = new TabSet('Root',
-        $tabMain = new Tab('Country',
-          TextField::create('Code', _t('Country.CODE', 'Code')),
-          TextField::create('Title', _t('Country.TITLE', 'Title'))
-        )
-      )
-    );
+			$rootTab = new TabSet('Root',
+				$tabMain = new Tab('Country',
+					TextField::create('Code', _t('Country.CODE', 'Code')),
+					TextField::create('Title', _t('Country.TITLE', 'Title'))
+				)
+			)
+		);
 
 		if ($this->isInDB()) {
 
@@ -349,16 +349,16 @@ class Country_Shipping extends Country {
 			// $detailForm->setItemRequestClass('GridFieldDetailForm_HasManyItemRequest');
 
 			$listField = new GridField(
-	      'Regions',
-	      'Regions',
-	      $this->Regions(),
-	      $config
-	    );
+				'Regions',
+				'Regions',
+				$this->Regions(),
+				$config
+			);
 
-	    $fields->addFieldToTab('Root.Regions', $listField);
+			$fields->addFieldToTab('Root.Regions', $listField);
 		}
 
-    return $fields;
+		return $fields;
 	}
 
 	public function Regions() {
@@ -376,33 +376,33 @@ class Country_Shipping extends Country {
  * @subpackage order
  */
 class Country_Billing extends Country {
-  
-  /**
-   * Build default list of billing countries
-   * 
-   * @see Country::$iso_3166_countryCodes
-   * @see DataObject::requireDefaultRecords()
-   */
-  public function requireDefaultRecords() {
-    
-    parent::requireDefaultRecords();
+	
+	/**
+	 * Build default list of billing countries
+	 * 
+	 * @see Country::$iso_3166_countryCodes
+	 * @see DataObject::requireDefaultRecords()
+	 */
+	public function requireDefaultRecords() {
+		
+		parent::requireDefaultRecords();
 
 		if (!DataObject::get_one('Country_Billing')) {
 
 			$shopConfig = ShopConfig::current_shop_config();
 
-		  foreach (self::$iso_3166_countryCodes as $code => $title) {
-		    $country = new Country_Billing();
-		    $country->Code = $code;
-		    $country->Title = $title;
-		    $country->ShopConfigID = $shopConfig->ID;
-		    $country->write();
-		  }
+			foreach (self::$iso_3166_countryCodes as $code => $title) {
+				$country = new Country_Billing();
+				$country->Code = $code;
+				$country->Title = $title;
+				$country->ShopConfigID = $shopConfig->ID;
+				$country->write();
+			}
 			DB::alteration_message('Billing countries created', 'created');
 		}
-  }
+	}
 
-  public function Regions() {
+	public function Regions() {
 		return Region_Billing::get()
 			->where("\"CountryID\" = " . $this->ID);
 	}

@@ -6,44 +6,44 @@
 	</head>
 	<body>
 
-	  <h3><% _t('Order_ReceiptEmail.GREETING', 'Hi') %> $Customer.Name,</h3>
-    $Message
+		<h3><% _t('Order_ReceiptEmail.GREETING', 'Hi') %> $Customer.Name,</h3>
+		$Message
 	
-	  <% with Order %>
-      <div class="order sws">
-        <table class="table table-bordered">
-          <tr>
-            <th>
-              <% _t('Order_ReceiptEmail.ORDER', 'Order') %> #$ID - $Status<br />
-              <a href="$Link" id="OrderLink"><% _t('Order_ReceiptEmail.VIEW_ORDER', 'View this order') %></a> 
-            </th>
-          </tr>
-          <tr>
-            <td>
-              $OrderedOn.Format(j M Y - g:i a)<br />
-              ($PaymentStatus)
-            </td>
-          </tr>
-        </table>
-  
-        <% include OrderAddresses %>
-     
-        <% include Order %>
-         
-        <% if Payments %>
-          <% include OrderPayments %>
-        <% end_if %>
-       
-        <% if CustomerUpdates %>
-          <% include OrderNotes %>
-        <% end_if %>
-      </div>
-    <% end_with %>
-    
-    <p>
-      <% _t('Order_ReceiptEmail.PAYMENTNOTICE', 'Please note that orders will not be shipped until payment has been successfully processed.') %>
-    </p>
-    
-    $Signature
+		<% with Order %>
+			<div class="order sws">
+				<table class="table table-bordered">
+					<tr>
+						<th>
+							<% _t('Order_ReceiptEmail.ORDER', 'Order') %> #$ID - $Status<br />
+							<a href="$Link" id="OrderLink"><% _t('Order_ReceiptEmail.VIEW_ORDER', 'View this order') %></a> 
+						</th>
+					</tr>
+					<tr>
+						<td>
+							$OrderedOn.Format(j M Y - g:i a)<br />
+							($PaymentStatus)
+						</td>
+					</tr>
+				</table>
+	
+				<% include OrderAddresses %>
+		 
+				<% include Order %>
+				 
+				<% if Payments %>
+					<% include OrderPayments %>
+				<% end_if %>
+			 
+				<% if CustomerUpdates %>
+					<% include OrderNotes %>
+				<% end_if %>
+			</div>
+		<% end_with %>
+		
+		<p>
+			<% _t('Order_ReceiptEmail.PAYMENTNOTICE', 'Please note that orders will not be shipped until payment has been successfully processed.') %>
+		</p>
+		
+		$Signature
 	</body>
 </html>
