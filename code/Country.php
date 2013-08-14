@@ -14,14 +14,14 @@ class Country extends DataObject {
 	 * 
 	 * @var String
 	 */
-	public static $singular_name = 'Country';
+	private static $singular_name = 'Country';
 	
 	/**
 	 * Plural name
 	 * 
 	 * @var String
 	 */
-	public static $plural_name = 'Countries';
+	private static $plural_name = 'Countries';
 	
 	/** 
 	 * ISO 3166 Country Codes, used to generate inital billing countries
@@ -279,7 +279,7 @@ class Country extends DataObject {
 	 * 
 	 * @var Array
 	 */
-	public static $db = array(
+	private static $db = array(
 		'Code' => 'Varchar(2)', //ISO 3166 
 		'Title' => 'Varchar'
 	);
@@ -289,7 +289,7 @@ class Country extends DataObject {
 	 * 
 	 * @var Array
 	 */
-	public static $has_one = array (
+	private static $has_one = array (
 		'ShopConfig' => 'ShopConfig'
 	);
 	
@@ -298,7 +298,7 @@ class Country extends DataObject {
 	 * 
 	 * @var Array
 	 */
-	public static $has_many = array (
+	private static $has_many = array (
 		'Regions' => 'Region'
 	);
 	
@@ -307,12 +307,12 @@ class Country extends DataObject {
 	 * 
 	 * @var Array
 	 */
-	public static $summary_fields = array(
+	private static $summary_fields = array(
 		'Title' => 'Title',
 		'Code' => 'Code'
 	);
 
-	public static $default_sort = 'Title ASC';
+	private static $default_sort = 'Title ASC';
 
 	public static function get_codes() {
 		return self::$iso_3166_countryCodes;

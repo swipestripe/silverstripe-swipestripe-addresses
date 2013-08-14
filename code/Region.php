@@ -14,21 +14,21 @@ class Region extends DataObject {
 	 * 
 	 * @var String
 	 */
-	public static $singular_name = 'Region';
+	private static $singular_name = 'Region';
 	
 	/**
 	 * Plural name
 	 * 
 	 * @var String
 	 */
-	public static $plural_name = 'Regions';
+	private static $plural_name = 'Regions';
 	 
 	/**
 	 * Fields 
 	 * 
 	 * @var Array
 	 */
-	public static $db = array(
+	private static $db = array(
 		'Code' => "Varchar", 
 		'Title' => 'Varchar',
 		'SortOrder' => 'Int'
@@ -39,7 +39,7 @@ class Region extends DataObject {
 	 * 
 	 * @var Array
 	 */
-	public static $has_one = array (
+	private static $has_one = array (
 		'ShopConfig' => 'ShopConfig',
 		'Country' => 'Country'
 	);
@@ -49,13 +49,13 @@ class Region extends DataObject {
 	 * 
 	 * @var Array
 	 */
-	public static $summary_fields = array(
+	private static $summary_fields = array(
 		'Title' => 'Title',
 		'Code' => 'Code',
 		'Country.Title' => 'Country'
 	);
 
-	public static $default_sort = 'SortOrder';
+	private static $default_sort = 'SortOrder';
 
 	/**
 	 * Convenience function to prevent errors thrown
@@ -99,7 +99,7 @@ class Region_Shipping extends Region {
 	 * 
 	 * @see DataObject::getCMSFields()
 	 */
-	function getCMSFields() {
+	public function getCMSFields() {
 
 		// $fields = new FieldList(
 		//   $rootTab = new TabSet('Root',

@@ -14,7 +14,7 @@ class Address extends DataObject {
 	 * 
 	 * @var Array
 	 */
-	public static $db = array(
+	private static $db = array(
 		'Default' => 'Boolean',
 		'FirstName' => 'Varchar',
 		'Surname' => 'Varchar',
@@ -37,13 +37,13 @@ class Address extends DataObject {
 	 * 
 	 * @var Array
 	 */
-	public static $has_one = array(
+	private static $has_one = array(
 		'Member' => 'Customer',  
 		'Country' => 'Country',
 		'Region' => 'Region'
 	);
 
-	function onAfterWrite() {
+	public function onAfterWrite() {
 		parent::onAfterWrite();
 
 		//Make sure there is only one default address
@@ -63,7 +63,7 @@ class Address extends DataObject {
 
 class Address_Shipping extends Address {
 
-	function onBeforeWrite() {
+	public function onBeforeWrite() {
 		parent::onBeforeWrite();
 
 		$code = $this->CountryCode;
@@ -94,7 +94,7 @@ class Address_Shipping extends Address {
 	 * @see Form::loadDataFrom()
 	 * @return Array Data for loading into the form
 	 */
-	function getCheckoutFormData() {
+	public function getCheckoutFormData() {
 		$formattedData = array();
 		
 		$formattedData['ShippingFirstName'] = $this->FirstName;
@@ -114,7 +114,7 @@ class Address_Shipping extends Address {
 
 class Address_Billing extends Address {
 
-	function onBeforeWrite() {
+	public function onBeforeWrite() {
 		parent::onBeforeWrite();
 
 		$code = $this->CountryCode;
@@ -135,7 +135,7 @@ class Address_Billing extends Address {
 	 * @see Form::loadDataFrom()
 	 * @return Array Data for loading into the form
 	 */
-	function getCheckoutFormData() {
+	public function getCheckoutFormData() {
 		$formattedData = array();
 		
 		$formattedData['BillingFirstName'] = $this->FirstName;
