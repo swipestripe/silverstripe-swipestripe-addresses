@@ -2,7 +2,7 @@
 
 class Addresses_Order extends DataExtension {
 
-	public static $db = array(
+	private static $db = array(
 		//Address fields
 		'ShippingFirstName' => 'Varchar',
 		'ShippingSurname' => 'Varchar',
@@ -56,7 +56,7 @@ class Addresses_Order extends DataExtension {
 
 class Addresses_Customer extends DataExtension {
 
-	static $has_many = array(
+	private static $has_many = array(
 		'ShippingAddresses' => 'Address_Shipping',
 		'BillingAddresses' => 'Address_Billing'
 	);
@@ -298,7 +298,7 @@ class Addresses_OrderForm extends Extension {
 
 class Addresses_Extension extends DataExtension {
 
-	public static $has_many = array(
+	private static $has_many = array(
 		'ShippingCountries' => 'Country_Shipping',
 		'BillingCountries' => 'Country_Billing',
 		'ShippingRegions' => 'Region_Shipping',
@@ -308,11 +308,18 @@ class Addresses_Extension extends DataExtension {
 
 class Addresses_CountriesAdmin extends ShopAdmin {
 
-	static $url_rule = 'ShopConfig/Countries';
-	static $url_priority = 70;
-	static $menu_title = 'Shop Countries';
+	private static $tree_class = 'ShopConfig';
+	
+	private static $allowed_actions = array(
+		'Countries',
+		'CountriesForm'
+	);
 
-	public static $url_handlers = array(
+	private static $url_rule = 'ShopConfig/Countries';
+	protected static $url_priority = 70;
+	private static $menu_title = 'Shop Countries';
+
+	private static $url_handlers = array(
 		'ShopConfig/Countries/CountriesForm' => 'CountriesForm',
 		'ShopConfig/Countries' => 'Countries'
 	);
