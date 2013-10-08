@@ -5,7 +5,7 @@ SwipeStripe
 [Contact Us](http://swipestripe.com/support/contact-us)
 
 ## Requirements
-* SilverStripe 3.*
+* SilverStripe 3.1.*
 * Swipe Stripe 2.1.*
 
 ## Documentation
