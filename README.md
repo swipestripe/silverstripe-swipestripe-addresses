@@ -6,7 +6,7 @@ SwipeStripe
 
 ## Requirements
 * SilverStripe 3.1.*
-* Swipe Stripe 2.1.*
+* SwipeStripe 2.1.*
 
 ## Documentation
 Add billing and shipping addresses to the checkout, address data is stored on the order as well as associated with the customer.
