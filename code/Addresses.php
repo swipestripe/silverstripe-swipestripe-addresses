@@ -181,6 +181,11 @@ class Addresses_Customer extends DataExtension {
 		}
 		return null;
 	}
+
+	public function updateCMSFields(FieldList $fields) {
+		$fields->removeByName('ShippingAddresses');
+		$fields->removeByName('BillingAddresses');
+	}
 }
 
 class Addresses_OrderForm extends Extension {
@@ -263,7 +268,7 @@ class Addresses_OrderForm extends Extension {
 
 	public function updatePopulateFields(&$data) {
 
-		$member = Customer::currentUser() ? Customer::currentUser() : singleton('Customer');
+		$member = Member::currentUser() ? Member::currentUser() : singleton('Member');
 
 		$shippingAddress = $member->ShippingAddress();
 		$shippingAddressData = ($shippingAddress && $shippingAddress->exists()) 
