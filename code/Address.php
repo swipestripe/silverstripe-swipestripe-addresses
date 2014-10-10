@@ -38,7 +38,7 @@ class Address extends DataObject {
 	 * @var Array
 	 */
 	private static $has_one = array(
-		'Member' => 'Customer',  
+		'Member' => 'Member',  
 		'Country' => 'Country',
 		'Region' => 'Region'
 	);
